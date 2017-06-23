@@ -23,7 +23,7 @@
 clear; close all;
 
 %% What images to process?
-whichProcess = 'phillyDatabase';
+whichProcess = 'botswanaCheck';
 switch (whichProcess)
     case 'botswanaDatabase'
         % This directory is our archive of what's on the server.  Don't
