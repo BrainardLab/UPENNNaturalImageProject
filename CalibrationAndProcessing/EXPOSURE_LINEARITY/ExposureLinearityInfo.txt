@@ -1,0 +1,33 @@
+Free fit slope for channel 1 f-16 is 1.01
+Mean absolute log10 error for channel 1 f-16 is 0.015
+Max absolute log10 error for channel 1 f-16 is 0.037
+Free fit slope for channel 2 f-16 is 1.00
+Mean absolute log10 error for channel 2 f-16 is 0.015
+Max absolute log10 error for channel 2 f-16 is 0.035
+Free fit slope for channel 3 f-16 is 1.02
+Mean absolute log10 error for channel 3 f-16 is 0.018
+Max absolute log10 error for channel 3 f-16 is 0.050
+Min exposure analyzed for f-16 was 0.003125
+
+Free fit slope for channel 1 f-11 is 1.01
+Mean absolute log10 error for channel 1 f-11 is 0.012
+Max absolute log10 error for channel 1 f-11 is 0.030
+Free fit slope for channel 2 f-11 is 1.00
+Mean absolute log10 error for channel 2 f-11 is 0.013
+Max absolute log10 error for channel 2 f-11 is 0.043
+Free fit slope for channel 3 f-11 is 1.02
+Mean absolute log10 error for channel 3 f-11 is 0.017
+Max absolute log10 error for channel 3 f-11 is 0.042
+Min exposure analyzed for f-11 was 0.001250
+
+Free fit slope for channel 1 f-5 is 1.01
+Mean absolute log10 error for channel 1 f-5 is 0.013
+Max absolute log10 error for channel 1 f-5 is 0.066
+Free fit slope for channel 2 f-5 is 1.00
+Mean absolute log10 error for channel 2 f-5 is 0.011
+Max absolute log10 error for channel 2 f-5 is 0.033
+Free fit slope for channel 3 f-5 is 1.02
+Mean absolute log10 error for channel 3 f-5 is 0.019
+Max absolute log10 error for channel 3 f-5 is 0.053
+Min exposure analyzed for f-5 was 0.000313
+

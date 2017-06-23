@@ -1,0 +1,20 @@
+Free fit slope for channel 1, set 1, is 0.99
+Mean absolute log10 error for channel 1, set 1, is 0.014
+Max absolute log10 error for channel 1, set 1, is 0.018
+Free fit slope for channel 2, set 1, is 0.98
+Mean absolute log10 error for channel 2, set 1, is 0.013
+Max absolute log10 error for channel 2, set 1, is 0.020
+Free fit slope for channel 3, set 1, is 0.99
+Mean absolute log10 error for channel 3, set 1, is 0.013
+Max absolute log10 error for channel 3, set 1, is 0.023
+
+Free fit slope for channel 1, set 2, is 1.03
+Mean absolute log10 error for channel 1, set 2, is 0.007
+Max absolute log10 error for channel 1, set 2, is 0.034
+Free fit slope for channel 2, set 2, is 1.02
+Mean absolute log10 error for channel 2, set 2, is 0.007
+Max absolute log10 error for channel 2, set 2, is 0.033
+Free fit slope for channel 3, set 2, is 1.04
+Mean absolute log10 error for channel 3, set 2, is 0.010
+Max absolute log10 error for channel 3, set 2, is 0.042
+
