@@ -124,8 +124,7 @@ for ii = 1:length(theDirectoriesFromServer)
                         percentImageDiscrepancy_LMS(indexLMS) = percentImageDiscrepancy;
                         indexLMS = indexLMS+1;
                     otherwise
-                end
-                
+                end       
             end
         end
     end
@@ -139,7 +138,7 @@ if (max(abs(percentImageDiscrepancy_RGB) ~= 0))
     xlabel('Percent Discrepancy');
     ylabel('Count');
 end
-fprintf('Maximum absolute RGB percentage discrepancy is %0.2f\n',percentImageDiscrepancy_RGB);
+fprintf('Maximum absolute RGB percentage discrepancy is %0.2f\n',max(percentImageDiscrepancy_RGB(:)));
 
 if (max(abs(percentImageDiscrepancy_LUM) ~= 0))
     LUMfig = figure;
@@ -148,7 +147,7 @@ if (max(abs(percentImageDiscrepancy_LUM) ~= 0))
     xlabel('Percent Discrepancy');
     ylabel('Count');
 end
-fprintf('Maximum absolute LUM percentage discrepancy is %0.2f\n',percentImageDiscrepancy_LUM);
+fprintf('Maximum absolute LUM percentage discrepancy is %0.2f\n',max(percentImageDiscrepancy_LUM(:)));
 
 if (max(abs(percentImageDiscrepancy_LMS) ~= 0))
     LMSfig = figure;
@@ -157,7 +156,7 @@ if (max(abs(percentImageDiscrepancy_LMS) ~= 0))
     xlabel('Percent Discrepancy');
     ylabel('Count');
 end
-fprintf('Maximum absolute LMS percentage discrepancy is %0.2f\n',percentImageDiscrepancy_LMS);
+fprintf('Maximum absolute LMS percentage discrepancy is %0.2f\n',max(percentImageDiscrepancy_LMS(:)));
 
 disp('***************** END *****************')
 
