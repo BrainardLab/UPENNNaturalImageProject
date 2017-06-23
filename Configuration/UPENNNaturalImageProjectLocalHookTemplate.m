@@ -44,7 +44,8 @@ end
 %% Set preferences
 
 % Images used in the calibration script
-setpref('UPENNNaturalImageProject','calibrationImageDir',fullfile(baseDir,'Calibration','Images','calibration'));
+setpref('UPENNNaturalImageProject','calibrationDir',fullfile(baseDir,'Calibration'));
+setpref('UPENNNaturalImageProject','calibrationImageDir',fullfile(getpref('UPENNNaturalImageProject','calibrationDir'),'Images','calibration'));
 
 % Botswana database
 setpref('UPENNNaturalImageProject','botswanaDatabase',fullfile(baseDir,'BotswanaImagesOrig'));

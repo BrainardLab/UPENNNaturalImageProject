@@ -8,15 +8,93 @@
 % To configure for running this, use:
 %   tbUseProject({'UPENNNaturalImageProject'},'reset','full');
 
+% 6/23/17  dhb  Started delving deeper.
+
 %% Clear
 clear; close all;
+
+%% Cd into directory containing this routine
+cd(fileparts(mfilename('fullpath')));
 
 %% Parameters
 percentDiscrepancyThreshold = 1;
 
-%% Process the following directories, each directory represents a set of images
+%% Do checks on these directories
 fromServerPath = getpref('UPENNNaturalImageProject','botswanaCheckFromServer');
 checkMePath = getpref('UPENNNaturalImageProject','botswanaCheck');
+
+%% Compare current calibration spectral sensitivity files with those archived from 2011
+spectralSensitivityDir = fullfile(fileparts(mfilename('fullpath')),'..','CalibrationAndProcessing','SPECTRAL_SENSITIVITY');
+mccDir = fullfile(fileparts(mfilename('fullpath')),'..','CalibrationAndProcessing','MCC');
+calibrationDir = getpref('UPENNNaturalImageProject','calibrationDir');
+the2011T_camera = load(fullfile(calibrationDir,'CameraSpectralSensFiles2011','T_camera2010'));
+theCurrentT_camera = load(fullfile(spectralSensitivityDir,'T_camera2010'));
+maxAbsDiff = max(abs(the2011T_camera.T_camera(:) - theCurrentT_camera.T_camera(:)));
+if (maxAbsDiff < eps)
+    fprintf('2011 and current T_camera files are the same to machine precision\n');
+else
+    meanAbsValue = mean(abs(the2011T_camera.T_camera(:)));
+    maxPercentDiff = 100*maxAbsDiff/meanAbsValue;
+    fprintf('2011 and current T_camera files differ at least a little\n');
+    fprintf('\tMax abs difference: %0.8e, mean abs value: %0.2g, max percent diff = %0.4f\n',maxAbsDiff,meanAbsValue,maxPercentDiff);
+end
+
+%% Compare current LMS fundamentals to those archived from 2012
+the2012T_cones = load(fullfile(calibrationDir,'PTBDataFiles2012','T_cones_ss2'));
+theCurrentT_cones = load('T_cones_ss2');
+maxAbsDiff = max(abs(the2012T_cones.T_cones_ss2(:) - theCurrentT_cones.T_cones_ss2(:)));
+if (maxAbsDiff < eps)
+    fprintf('2012 and current T_cones_ss2 files are the same to machine precision\n');
+else
+    meanAbsValue = mean(abs(the2012T_cones.M_RGBToLMS(:)));
+    maxPercentDiff = 100*maxAbsDiff/meanAbsValue;
+    fprintf('2012 and current T_cones_ss2 files differ at least a little\n');
+    fprintf('\tMax abs difference: %0.8e, mean abs value: %0.2g, max percent diff = %0.4f\n',maxAbsDiff,meanAbsValue,maxPercentDiff);
+end
+
+%% Compare current LMS transform matrix to that archived from 2011
+the2011M_RGBToLMS = load(fullfile(calibrationDir,'CameraSpectralSensFiles2011','M_RGBToLMS2010'));
+theCurrentM_RGBToLMS = load(fullfile(spectralSensitivityDir,'M_RGBToLMS2010'));
+maxAbsDiff = max(abs(the2011M_RGBToLMS.M_RGBToLMS(:) - theCurrentM_RGBToLMS.M_RGBToLMS(:)));
+if (maxAbsDiff < eps)
+    fprintf('2011 and current M_RGBToLMS files are the same to machine precision\n');
+else
+    meanAbsValue = mean(abs(the2011M_RGBToLMS.M_RGBToLMS(:)));
+    maxPercentDiff = 100*maxAbsDiff/meanAbsValue;
+    fprintf('2011 and current M_RGBToLMS files differ at least a little\n');
+    fprintf('\tMax abs difference: %0.8e, mean abs value: %0.2g, max percent diff = %0.4f\n',maxAbsDiff,meanAbsValue,maxPercentDiff);
+end
+
+%% Compare current isomerizations to those from 2011
+the2011LMSToIsomerizations= load(fullfile(calibrationDir,'IsomerizationsFiles2011','LMSToIsomerizations'));
+theCurrentLMSToIsomerizations = load(fullfile(mccDir,'LMSToIsomerizations'));
+maxAbsDiff = max(abs(the2011LMSToIsomerizations.LMSToIsomerizations(:) - theCurrentLMSToIsomerizations.LMSToIsomerizations(:)));
+if (maxAbsDiff < eps)
+    fprintf('2011 and current LMSToIsomerizations files are the same to machine precision\n');
+else
+    meanAbsValue = mean(abs(the2011LMSToIsomerizations.LMSToIsomerizations(:)));
+    maxPercentDiff = 100*maxAbsDiff/meanAbsValue;
+    fprintf('2011 and current LMSToIsomerizations files differ at least a little\n');
+    fprintf('\tMax abs difference: %0.8e, mean abs value: %0.2g, max percent diff = %0.4f\n',maxAbsDiff,meanAbsValue,maxPercentDiff);
+end
+
+%% Derive the standard camera RGBToLMS transformation matrix for a pair of RGB and LMS files
+theRGBFileFromServer = load(fullfile(fromServerPath,'out','cd17B_closeup_palm_nut_fresh_shade_sun','DSC_0208_RGB'));
+theLMSFileFromServer = load(fullfile(fromServerPath,'out','cd17B_closeup_palm_nut_fresh_shade_sun','DSC_0208_LMS'));
+theRGB = ImageToCalFormat(theRGBFileFromServer.RGB_Image);
+theLMS = ImageToCalFormat(theLMSFileFromServer.LMS_Image);
+M_RGBToLMSFromServer = ((theRGB')\(theLMS'))';
+M_RGBToLMSFromServer./the2011M_RGBToLMS.M_RGBToLMS
+
+%Cam_Cal = LoadCamCal(theImage.imageInfo.whichCamera);
+
+% load T_cones_ss2
+% T_cones = SplineCmf(S_cones_ss2,T_cones_ss2,S_camera);
+% load T_ss2000_Y2 
+% T_Y = SplineCmf(S_ss2000_Y2,683*T_ss2000_Y2,S_camera);
+% M_RGBToLMS = ((T_camera')\(T_cones'))';
+% T_cones_check = M_RGBToLMS*(T_camera);
+% M_LMSToLum = ((T_cones')\(T_Y'))';
 
 %% Say hello
 disp('**************** BEGIN ****************')
